@@ -1,0 +1,55 @@
+﻿@model homework06.Models.GuestResponse
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<!--Exercise 3 Validation-->
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <title>Birthday Card</title>
+</head>
+
+<body>
+    <!--Exercise 4 Validation-->
+    <h5>Birthday Card Generator</h5>
+    <hr />
+
+    <h3>Send a Birthday Card</h3>
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="BirthdayCard">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="From" class="control-label"></label>
+                    <input asp-for="From" class="form-control" />
+                    <span asp-validation-for="From" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="To" class="control-label"></label>
+                    <input asp-for="To" class="form-control" />
+                    <span asp-validation-for="To" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group">
+                    <label asp-for="Message" class="control-label"></label>
+                    <input asp-for="Message" class="form-control" />
+                    <span asp-validation-for="Message" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <!--Exercise 5 Validation-->
+                    <input type="submit" value="Send Card" class="btn btn-success" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

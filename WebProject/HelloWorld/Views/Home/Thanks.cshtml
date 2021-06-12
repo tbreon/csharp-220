@@ -1,0 +1,21 @@
+﻿@model homework06.Models.GuestResponse
+@{ Layout = null; }
+<!DOCTYPE html>
+
+<!--Exercise 2 Validation-->
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <title>Thanks</title>
+</head>
+
+<h5>Birthday Card Generator</h5>
+<hr />
+
+<h3>Birthday Card Sent</h3>
+
+<h1>From: @Model.From</h1>
+<h1>To: @Model.To</h1>
+<h1>Message @Model.Message</h1>
+
+
