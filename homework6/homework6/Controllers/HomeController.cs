@@ -17,14 +17,14 @@ namespace homework06.Controllers
         [HttpGet]
         public IActionResult BirthdayCard()
         {
-            return View(new GuestResponse());
+            return View(new BirthdayCardResponse());
         }
         [HttpPost]
-        public IActionResult BirthdayCard(Models.GuestResponse guestResponse)
+        public IActionResult BirthdayCard(Models.BirthdayCardResponse guestResponse)
         {
             if (ModelState.IsValid)
             {
-                return View("Thanks", guestResponse);
+                return View("Sent", guestResponse);
             }
             else
             {

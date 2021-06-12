@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace homework06.Models
 {
-    public class GuestResponse
+    public class BirthdayCardResponse
     {
         [Required(ErrorMessage = "Please enter From")]
         public string From { get; set; }
