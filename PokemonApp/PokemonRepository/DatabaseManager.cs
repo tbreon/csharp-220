@@ -1,19 +1,19 @@
-﻿using ContactDB;
+﻿using PokemonDB;
 
-namespace ContactRepository
+namespace PokemonRepository
 {
     public class DatabaseManager
     {
-        private static readonly ContactsContext entities;
+        private static readonly PokemonContext entities;
 
         // Initialize and open the database connection
         static DatabaseManager()
         {
-            entities = new ContactsContext();
+            entities = new PokemonContext();
         }
 
         // Provide an accessor to the database
-        public static ContactsContext Instance
+        public static PokemonContext Instance
         {
             get
             {

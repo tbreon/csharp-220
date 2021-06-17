@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ContactDB
+namespace PokemonApp
 {
-    public partial class Contact
+    public partial class Pokemon
     {
         public int PokemonId { get; set; }
         public string PokemonCharacter { get; set; }

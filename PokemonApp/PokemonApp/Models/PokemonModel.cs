@@ -2,9 +2,9 @@
 using AutoMapper; // Exercise 2 NuGet Package Installed and called here
 using System.ComponentModel; // add this for validation
 
-namespace ContactApp.Models
+namespace PokemonApp.Models
 {
-    public class ContactModel : IDataErrorInfo, INotifyPropertyChanged
+    public class PokemonModel : IDataErrorInfo, INotifyPropertyChanged
     {
         public int Id { get; set; }
         public string Character { get; set; }
@@ -18,11 +18,11 @@ namespace ContactApp.Models
         public decimal SoldPrice { get; set; }
         public DateTime DateSold { get; set; }
 
-        // add the validation code here
         private string characterError { get; set; }
        
-        // Exercise 1 - validation for email
         private string finishError { get; set; }
+
+        private string setError { get; set; }
 
         // INotifyPropertyChanged interface
         public event PropertyChangedEventHandler PropertyChanged;
@@ -73,9 +73,41 @@ namespace ContactApp.Models
 
                             return FinishError;
                         }
+
+                    case "Set":
+                        {
+                            SetError = "";
+
+                            if (Set == null || string.IsNullOrEmpty(Set))
+                            {
+                                SetError = "Set cannot be empty.";
+                            }
+                            else if (Set.Length > 12)
+                            {
+                                SetError = "Set cannot be longer than 12 characters.";
+                            }
+
+                            return SetError;
+                        }
                 }
 
                 return null;
+            }
+        }
+
+        public string SetError
+        {
+            get
+            {
+                return setError;
+            }
+            set
+            {
+                if (setError != value)
+                {
+                    setError = value;
+                    OnPropertyChanged("CharacterError");
+                }
             }
         }
 
@@ -95,7 +127,6 @@ namespace ContactApp.Models
             }
         } 
 
-        // Exercise 1 - Validation for Finish Error
         public string FinishError
         {
             get
@@ -117,15 +148,15 @@ namespace ContactApp.Models
         // Exercise 2 - Fix update so background behaves correctly
         // adding Clone() method
         // so both objects do not point to the same data
-        internal ContactModel Clone()
+        internal PokemonModel Clone()
         {
-            return (ContactModel)this.MemberwiseClone();
+            return (PokemonModel)this.MemberwiseClone();
         }
 
         // Exercise 2 - Automapper Configuration
         private static readonly MapperConfiguration
           config = new MapperConfiguration(cfg => cfg.
-          CreateMap<ContactRepository.ContactModel, ContactModel>()
+          CreateMap<PokemonRepository.PokemonModel, PokemonModel>()
           .ReverseMap());
 
         private static IMapper mapper = config.CreateMapper();
@@ -133,12 +164,12 @@ namespace ContactApp.Models
         // Exercise 2 - Cont. use the mapper 
         // Returning the Repository version of the UI Model
         // Going from Model to Repository
-        public ContactRepository.ContactModel ToRepositoryModel()
+        public PokemonRepository.PokemonModel ToRepositoryModel()
         {
             // Exercise 2 under Delete - do not call field by field
             //  use Automapper to call on the data
 
-            //var repositoryModel = new ContactRepository.ContactModel
+            //var repositoryModel = new PokemonRepository.PokemonModel
             //{
             //    Age = Age,
             //    CreatedDate = CreatedDate,
@@ -150,7 +181,7 @@ namespace ContactApp.Models
             //    PhoneType = PhoneType
             //};
 
-            var repositoryModel = mapper.Map<ContactRepository.ContactModel>(this);
+            var repositoryModel = mapper.Map<PokemonRepository.PokemonModel>(this);
 
             return repositoryModel;
             
@@ -159,9 +190,9 @@ namespace ContactApp.Models
         // Exercise 2 - Cont. use the mapper 
         // Returning the UI version of the Repository Model
         // Going from Respository to UI Model
-        public static ContactModel ToModel(ContactRepository.ContactModel repositoryModel)
+        public static PokemonModel ToModel(PokemonRepository.PokemonModel repositoryModel)
         {
-            //var contactModel = new ContactModel
+            //var pokemonModel = new PokemonModel
             //{
             //    Age = respositoryModel.Age,
             //    CreatedDate = respositoryModel.CreatedDate,
@@ -173,9 +204,9 @@ namespace ContactApp.Models
             //    PhoneType = respositoryModel.PhoneType
             //};
 
-            var contactModel = mapper.Map<ContactModel>(repositoryModel);
+            var pokemonModel = mapper.Map<PokemonModel>(repositoryModel);
 
-            return contactModel;
+            return pokemonModel;
 
 
         }

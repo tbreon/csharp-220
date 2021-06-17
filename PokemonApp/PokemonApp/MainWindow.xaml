@@ -1,9 +1,9 @@
-﻿<Window x:Class="ContactApp.MainWindow"
+﻿<Window x:Class="PokemonApp.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ContactApp"
+        xmlns:local="clr-namespace:PokemonApp"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="900">
     <StackPanel Orientation="Vertical">
@@ -16,10 +16,10 @@
 
             </MenuItem>
         </Menu>
-        <!--Exercise 1 for update use double click to have Contact Window to pop-->
-        <ListView x:Name="uxContactList" Height="200" 
-                  SelectionChanged="uxContactList_SelectionChanged" 
-                  MouseDoubleClick="uxContactList_MouseDoubleClick">
+        <!--Exercise 1 for update use double click to have Pokemon Window to pop-->
+        <ListView x:Name="uxPokemonList" Height="200" 
+                  SelectionChanged="uxPokemonList_SelectionChanged" 
+                  MouseDoubleClick="uxPokemonList_MouseDoubleClick">
             <!---->
             <ListView.ContextMenu>
                 <ContextMenu>

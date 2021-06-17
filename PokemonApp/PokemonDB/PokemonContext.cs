@@ -2,36 +2,34 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace ContactDB
+namespace PokemonDB
 {
-    public partial class ContactsContext : DbContext
+    public partial class PokemonContext : DbContext
     {
-        public ContactsContext()
+        public PokemonContext()
         {
         }
 
-        public ContactsContext(DbContextOptions<ContactsContext> options)
+        public PokemonContext(DbContextOptions<PokemonContext> options)
             : base(options)
         {
         }
 
-        public virtual DbSet<Contact> Contact { get; set; }
+        public virtual DbSet<Pokemon> Pokemon { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Data Source=.\\SQLEXPRESS;Initial Catalog=Contacts;integrated security=True");
+                optionsBuilder.UseSqlServer("Data Source=.\\SQLEXPRESS;Initial Catalog=Pokemon;integrated security=True");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Contact>(entity =>
+            modelBuilder.Entity<Pokemon>(entity =>
             {
-                entity.HasKey(e => e.PokemonId);
-
                 entity.Property(e => e.PokemonCardCondition).HasMaxLength(50);
 
                 entity.Property(e => e.PokemonCharacter)

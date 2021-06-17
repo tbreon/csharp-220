@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Media;
 
-namespace ContactApp
+namespace PokemonApp
 {
     public class SortAdorner : Adorner
     {

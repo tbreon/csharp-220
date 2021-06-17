@@ -1,11 +1,11 @@
-﻿using ContactApp.Models;
+﻿using PokemonApp.Models;
 using System.Linq;
 using System.Windows;
 using System.ComponentModel; // added
 using System.Windows.Controls; // added
 using System.Windows.Documents; //added
 
-namespace ContactApp
+namespace PokemonApp
 
 {
     public partial class MainWindow : Window
@@ -14,74 +14,74 @@ namespace ContactApp
         private GridViewColumnHeader listViewSortCol = null; // added for exercise
         private SortAdorner listViewSortAdorner = null;      // added for exercise
 
-        private ContactModel selectedContact;
+        private PokemonModel selectedPokemon;
 
 
         public MainWindow()
         {
             InitializeComponent();
 
-            LoadContacts();
+            LoadPokemons();
         }
 
-        private void LoadContacts()
+        private void LoadPokemons()
         {
-            var contacts = App.ContactRepository.GetAll();
+            var pokemons = App.PokemonRepository.GetAll();
 
-            uxContactList.ItemsSource = contacts
-                .Select(t => ContactModel.ToModel(t))
+            uxPokemonList.ItemsSource = pokemons
+                .Select(t => PokemonModel.ToModel(t))
                 .ToList();
 
             // OR
-            //var uiContactModelList = new List<ContactModel>();
-            //foreach (var repositoryContactModel in contacts)
+            //var uiPokemonModelList = new List<PokemonModel>();
+            //foreach (var repositoryPokemonModel in pokemons)
             //{
             //    This is the .Select(t => ... )
-            //    var uiContactModel = ContactModel.ToModel(repositoryContactModel);
+            //    var uiPokemonModel = PokemonModel.ToModel(repositoryPokemonModel);
             //
-            //    uiContactModelList.Add(uiContactModel);
+            //    uiPokemonModelList.Add(uiPokemonModel);
             //}
 
-            //uxContactList.ItemsSource = uiContactModelList;
+            //uxPokemonList.ItemsSource = uiPokemonModelList;
         }
 
         // add this method for doing updates
         private void uxFileChange_Click(object sender, RoutedEventArgs e)
         {
-            var window = new ContactWindow();
+            var window = new PokemonWindow();
             
             // Exercise 2 for update - fix this to call on Clone()
-            window.Contact = selectedContact.Clone();
+            window.Pokemon = selectedPokemon.Clone();
 
             if (window.ShowDialog() == true)
             {
-                App.ContactRepository.Update(window.Contact.ToRepositoryModel());
-                LoadContacts();
+                App.PokemonRepository.Update(window.Pokemon.ToRepositoryModel());
+                LoadPokemons();
             }
         }
 
         private void uxFileChange_Loaded(object sender, RoutedEventArgs e)
         {
-            uxFileChange.IsEnabled = (selectedContact != null);
+            uxFileChange.IsEnabled = (selectedPokemon != null);
             uxContextFileChange.IsEnabled = uxFileChange.IsEnabled;
         }
 
         private void uxFileNew_Click(object sender, RoutedEventArgs e)
         {
-            var window = new ContactWindow();
+            var window = new PokemonWindow();
 
             if (window.ShowDialog() == true)
             {
-                var uiContactModel = window.Contact;
+                var uiPokemonModel = window.Pokemon;
 
-                var repositoryContactModel = uiContactModel.ToRepositoryModel();
+                var repositoryPokemonModel = uiPokemonModel.ToRepositoryModel();
 
-                App.ContactRepository.Add(repositoryContactModel);
+                App.PokemonRepository.Add(repositoryPokemonModel);
 
                 // OR
-                //App.ContactRepository.Add(window.Contact.ToRepositoryModel());
+                //App.PokemonRepository.Add(window.Pokemon.ToRepositoryModel());
 
-                LoadContacts();
+                LoadPokemons();
             }
         }        
 
@@ -93,7 +93,7 @@ namespace ContactApp
             if (listViewSortCol != null)
             {
                 AdornerLayer.GetAdornerLayer(listViewSortCol).Remove(listViewSortAdorner);
-                uxContactList.Items.SortDescriptions.Clear();
+                uxPokemonList.Items.SortDescriptions.Clear();
             }
 
             ListSortDirection newDir = ListSortDirection.Ascending;
@@ -103,33 +103,33 @@ namespace ContactApp
             listViewSortCol = column;
             listViewSortAdorner = new SortAdorner(listViewSortCol, newDir);
             AdornerLayer.GetAdornerLayer(listViewSortCol).Add(listViewSortAdorner);
-            uxContactList.Items.SortDescriptions.Add(new SortDescription(sortBy, newDir));
+            uxPokemonList.Items.SortDescriptions.Add(new SortDescription(sortBy, newDir));
         }
 
         // Important Method: detect if selection has been made
-        private void uxContactList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void uxPokemonList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            selectedContact = (ContactModel)uxContactList.SelectedValue;
+            selectedPokemon = (PokemonModel)uxPokemonList.SelectedValue;
 
             // Exercise 1 under Delete - fix the context menu
-            uxContextFileDelete.IsEnabled = (selectedContact != null);
+            uxContextFileDelete.IsEnabled = (selectedPokemon != null);
 
         }
 
         private void uxFileDelete_Click(object sender, RoutedEventArgs e)
         {
-            App.ContactRepository.Remove(selectedContact.Id);
-            selectedContact = null;
-            LoadContacts();
+            App.PokemonRepository.Remove(selectedPokemon.Id);
+            selectedPokemon = null;
+            LoadPokemons();
         }
 
         private void uxFileDelete_Loaded(object sender, RoutedEventArgs e)
         {
-            uxFileDelete.IsEnabled = (selectedContact != null);
+            uxFileDelete.IsEnabled = (selectedPokemon != null);
         }
 
-        // Exercise 1 - Update double-clicking on a contact will bring up the update Contact window
-        private void uxContactList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        // Exercise 1 - Update double-clicking on a pokemon will bring up the update Pokemon window
+        private void uxPokemonList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             // call on this FileChange Click function with two null parameters
             uxFileChange_Click(sender, null);
