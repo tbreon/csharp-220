@@ -11,7 +11,7 @@ namespace PokemonDB
         public string PokemonSet { get; set; }
         public string PokemonCardCondition { get; set; }
         public int PokemonGrade { get; set; }
-        public string PokemonUrl { get; set; }
+        public string PokemonURL { get; set; }
         public DateTime PokemonCreatedDate { get; set; }
         public int? PokemonYearManufactured { get; set; }
         public decimal? PokemonSoldPrice { get; set; }
