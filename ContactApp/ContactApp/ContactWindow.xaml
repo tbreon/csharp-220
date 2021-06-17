@@ -1,0 +1,75 @@
+﻿<Window x:Class="ContactApp.ContactWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ContactApp"
+        mc:Ignorable="d"
+        Title="ContactWindow" Width="300" Height="340"
+        FocusManager.FocusedElement="{Binding ElementName=uxCharacter}" Loaded="Window_Loaded">
+
+    <Grid x:Name="uxGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="1">
+            <TextBox x:Name="uxCharacter" Text="{Binding Character, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"></TextBox>
+            <TextBlock x:Name="uxCharacterError" Text="{Binding CharacterError, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+        </StackPanel>
+
+        <!--Exercise 1 under validation-->
+        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1">
+            <TextBox x:Name="uxFinish" Text="{Binding Finish, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"></TextBox>
+            <TextBlock x:Name="uxFinishError" Text="{Binding FinishError, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+        </StackPanel>
+
+
+        <TextBlock Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right">Set:</TextBlock>
+        <TextBox x:Name="uxSet" Text="{Binding Set}" Grid.Column="1" Grid.Row="2"></TextBox>
+
+        <TextBlock Grid.Column="0" Grid.Row="3" HorizontalAlignment="Right">Card Condition:</TextBlock>
+        <TextBox x:Name="uxCardCondition" Text="{Binding CardCondition}" Grid.Column="1" Grid.Row="3"></TextBox>
+
+        <TextBlock Grid.Column="0" Grid.Row="4" HorizontalAlignment="Right">PokemonId:</TextBlock>
+
+        
+        <!--Exercise 1 to add age and slider-->
+        <TextBlock Grid.Row="5" HorizontalAlignment="Right">Grade:</TextBlock>
+        <StackPanel Grid.Row="5" Grid.Column="1">
+            <TextBlock x:Name="uxGrade" Text="{Binding ElementName=uxGradeSlider, Path=Value}"/>
+            <Slider x:Name="uxGradeSlider"  Value="{Binding Grade}" IsSnapToTickEnabled="true" Minimum="1" Maximum="10"/>
+        </StackPanel>
+
+        <TextBlock Grid.Column="0" Grid.Row="6" HorizontalAlignment="Right">Year Manufactured:</TextBlock>
+        <TextBox x:Name="uxYearManufactured" Text="{Binding YearManufactured}" Grid.Column="1" Grid.Row="6"></TextBox>
+
+        <TextBlock Grid.Column="0" Grid.Row="7" HorizontalAlignment="Right">URL:</TextBlock>
+        <TextBox x:Name="uxURL" Text="{Binding URL}" Grid.Column="1" Grid.Row="7"></TextBox>
+
+        <TextBlock Grid.Column="0" Grid.Row="8" HorizontalAlignment="Right">Sold Price:</TextBlock>
+        <TextBox x:Name="uxSoldPrice" Text="{Binding SoldPrice}" Grid.Column="1" Grid.Row="8"></TextBox>
+        
+        <TextBlock Grid.Column="0" Grid.Row="9" HorizontalAlignment="Right">Date Sold:</TextBlock>
+        <TextBox x:Name="uxDateSold" Text="{Binding DateSold}" Grid.Column="1" Grid.Row="9"></TextBox>
+
+        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="10" HorizontalAlignment="Right">
+            <Button x:Name="uxSubmit"  MinWidth="10" HorizontalAlignment="Center" Click="uxSubmit_Click" Margin="10">Add</Button>
+            <Button x:Name="uxCancel"  MinWidth="10" HorizontalAlignment="Center" Click="uxCancel_Click" Margin="10">Cancel</Button>
+        </StackPanel>
+    </Grid>
+</Window>
